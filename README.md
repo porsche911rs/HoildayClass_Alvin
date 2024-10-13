@@ -1,4 +1,4 @@
-#Javascript lesson
+# Javascript lesson
 ## Week1
  1. Try to build HTML document.
  2. Test conole.log(...).
