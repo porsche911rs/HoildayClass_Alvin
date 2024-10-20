@@ -13,3 +13,10 @@
  8. Use single for-loop to implement multiplication table.
  9. Introduce while-loop statement.
  10. Practice use break & continue statement to for-loop.
+ 11. Practice use return statement to leave while-loop.
+## Week3
+1. Practice array Restructuring and Destructuring.
+2. Introduce arrow-functions.
+3. Introduce how to apply foreach method.
+4. Introduce common use object prototype.
+5. Introduce how to apply random method.
