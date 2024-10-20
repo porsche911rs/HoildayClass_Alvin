@@ -10,3 +10,6 @@
  5. Introduce if-else statement.
  6. Introduce switch-case statement.
  7. Introduce for-loop statement.
+ 8. Use single for-loop to implement multiplication table.
+ 9. Introduce while-loop statement.
+ 10. Practice use break & continue statement to for-loop.
