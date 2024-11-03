@@ -50,9 +50,10 @@ for(let i=0; i<arr.length; i++)
 {
     arr[i] = rand(45,80);
     console.log(arr[i]);
+    console.log("Arr Length:"+arr.length);
 }
 
 //method3 
-//const fakeArr = arr.apply(null, new array(10)).map((i)=> rand(45,80));
-//console.log(fakeArr);
+const fakeArr = arr.apply(null, new Array(10)).map((i)=> rand(45,80));
+console.log(fakeArr);
 //Quiz: 產生6個數字1~49

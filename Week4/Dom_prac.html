@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM practice</title>
+    <script>
+        let GetEl = null; //提升至全域變數
+        onload = function()
+        {
+            let GetEl = document.getElementById('Alvin');
+            console.log(getEl.innerHTML);
+            //console.log(getEl.textContent);
+            getEl.innerHTML = 'Alvin';
+        }
+    </script>
+</head>
+<body>
+    <h1 id="Alvin" title="is header element">Dom練習</h1>
+    <h2>Go! Go! Go! Don't lazy!</h2>
+    <h3>Keep learning~ You need money!!!</h3>
+    <img src="./Magic.jpg">
+</body>
+</html>
