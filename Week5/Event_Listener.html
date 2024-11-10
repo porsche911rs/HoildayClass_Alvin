@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week5 practice</title>
+    <style></style>
+</head>
+<body>
+    <input type="button" id="ock" value="try me">
+    <input type="button" value="取消Todo3 from Todo1" onclick="ClearLister">
+    <!-- <input type="button" id="canel" value="取消 todo3 from js" -->
+    <hr>
+    <input type="password">
+    <button>view</button>
+
+</body>
+<script>
+    const ock = document.querySelector('#ock');
+    //ock.addEventListener(event, todo function)
+    // ock.addEventListener('click', ()=>
+    // {
+    //     console.log('click');
+    // });
+    function Todo1()
+    {
+        console.log('Click1');
+    }
+
+    const Todo2 = ()=> console.log('click2');
+    const Todo3 = function()
+    {
+        comsole.log('click3');
+    };
+
+    ock.addEventListener('click',Todo1);
+    ock.addEventListener('mouseover',Todo2);
+    ock.addEventListener('mouseover',Todo3);
+
+    document.addEventListener('contextmenu', (e)=> 
+    {
+        e.preventDefault();
+    });
+
+    function ClearLister()
+    {
+        ock.removeEventListener();
+    }
+
+    /*=======Boumds password========*/
+    const pwd = document.querySelector('input[type=password]');
+    const pwdSwitch = document. querySelector('Input[type=password]-button');
+
+    pwdSwitch.addEventListener('mousedown', function()
+    {
+        pwd.type = 'text';
+        this.innerHTML='show';
+    });
+    pwdSwitch.addEventListener('mouseup', function()
+    {
+        pwd.attributes('type', 'password');
+        //pwd.type = 'text';
+        this.innerHTML='hide';
+    });
+    pwdSwitch.addEventListener('mouseout', function()
+    {
+        pwd.type = 'password';
+        this.innerHTML='hide';
+    });
+    
+</script>
+</html>

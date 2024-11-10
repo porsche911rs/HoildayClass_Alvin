@@ -25,3 +25,6 @@
  2. Introduce time object 'Date'.
  3. Introduce javascript BOM & DOM.
  4. Practice how to applicate setTimeout() & setInterval().
+## Week5
+ 1. Introduce 'Event'. For example: Button onclick event.
+ 2. Introduce how to use 'EventLister'.

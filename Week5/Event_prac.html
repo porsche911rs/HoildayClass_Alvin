@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week5 practice</title>
+    <style></style>
+</head>
+<body>
+  <input type="button" class="demo" value="onclick demo" id="demo" onclick="showalert('我是 onclick 效果')">
+  <hr>
+  <!-- <input type="button" value="onclick test" id="Alvin"onclick="whatIs()" style = "color: green"> -->
+  <!-- <input type="button" value="onmouseup" onmouseup="whatIs(this)">
+  <input type="button" value="onmouseover" onmouseover="whatIs(this)">
+  <input type="button" value="onmouseout" onmouseout="whatIs(this)">
+  <input type="button" value="onclick test" id="Alvin" onclick="whatIs(this)"> -->
+  <input type="password" value="" onchange="checkPWD(this)"><small id="PWD-Info"></small>
+  <span id="pw-info"></span>
+  <!-- <hr> -->
+  <!-- <input type="button" value="onmousedown" onmousedown="whatIs(this)">
+  <input type="button" value="onmouseup" onmouseup="whatIs(this)">
+  <input type="button" value="onmouseover" onmouseover="whatIs(this)">
+  <input type="button" value="onmouseout" onmouseout="whatIs(this)">
+  <input value="onchange" onchange="whatIs(this)">
+  <input value="onblur" onblur="whatIs(this)">
+  <input value="onfocus" onfocus="whatIs(this)"> -->
+
+  <div id="fakeBtn"></div>
+  <hr>
+  <div>妳按下的鍵盤：(<span id="codename"></span>)號碼為:<span id="keycode"></span></div>
+
+  <select>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+  </select>
+  <script>
+    // function showalert(Msg)
+    // {
+    //     // console.log(Msg);
+    //     const node = document.getElementById('demo');
+    //     node.value = 'Hello world';
+    //     //Method1
+    //     node.style.color='red';
+    //     node.style.fontSize = '2rem';
+    //     //method2
+    //     node.style = 'color=red; font-size: 2rem';
+    //     console.log(node.style);
+    //     //method3
+    //     node.classList.add('active');
+    //     //node.classList.remove('demo');
+    // }
+    
+    //method3
+    //node.classname='demo highlight';
+    const checkPWD = function(HtmlElement)
+    {
+        console.log(HtmlElement.value);
+        if(HtmlElement.value.length < 8)
+            document.querySelector('#pwd-info'.innerHTML) = "Password too short, at least have 8 words."
+        else
+            documnt.querySelector('#pwd-info').innerHTML = '';
+    }
+
+    // const whatIs = function(node) //透過參數，把物件丟進來，在html元素上面，把上面this指向自己
+    // {
+    //     // const node = document.getElementById('Loki');
+    //     // const node = AlvinPara;
+    //     // node.value = 'Hello Alvin';
+    //     // node.classList.add('active here');
+
+    //     // console.log(this); //這裡的this指向自己，也就是js自己就是整個window
+
+    //     node.value = 'Hello Alvin';
+    //     node.classList.toggle('active');
+    // }
+
+    const FakeBtnTodo=function()
+    {
+        //console.log(1234);
+        const btn = document.querySelector('#FakeBtn');
+        btn.innerHTML = '假按鈕的拉';
+        btn.style = `
+           background: lightblue;
+           box-shadow: 1px 2px 2px 1px #0000004d;
+           cursor: pointer;
+           display: inline-block;
+           padding; 2px 10px;
+        `;
+        // console.log(this);
+        // btn.onclick = whatIs(this);
+        btn.onclick = function() //匿名函式可以協助把物件本體的定義，繼承至匿名函式內
+        {
+            whatIs(this); //宣告function當下沒有this的定義，this一律指向window
+        }
+    }
+
+    document.oncontextmenu = function(BtnEvent)
+    {
+        if(BtnEvent.keyCode == 123)
+        {
+            return;
+        }
+    }
+    //Call function
+    FakeBtnTodo();
+    /**************Keyboard event**************/
+    document.onkeydown = function(BtnEvent)
+    {
+        //console.log(BtnEvent);
+        BtnEvent.preventDefault(); //要求取消預設行為
+        document.querySelector('#Codename').innerHTML = BtnEvent.code;
+        document.querySelector('#keycode').innerHTML = BtnEvent.keyCode;
+
+    }
+    
+    /**************Window event**************/
+    window.onresize = function()
+    {
+        // console.log(window.innerWidth);
+        console.log(document.querySelector('#Alvin').value);
+    }
+    </script>
+</body>
+</html>
