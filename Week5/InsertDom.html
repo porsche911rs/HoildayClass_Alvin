@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week5 practice</title>
+    <style></style>
+</head>
+<body>
+    <p id="demo">按這裡，由 DOM 觸發 JS</p>
+    <div class="group">
+    </div>
+    <script>
+      const demo = document.querySelector('#demo');
+
+      demo.addEventListener('click', () => 
+      {
+        const btn = document.createElement('button');
+        btn.textContent = '按鈕';
+        btn.style.color = "red";
+        const myLink = document.createElement('a');
+        myLink.textContent = '連結';
+        myLink.style.background = 'black';
+        myLink.style.color = 'white';
+
+        document.querySelector('.group').removeChild('beforeend', btn);
+        console.log(btn);
+      });
+      function add() {
+        var btn = document.createElement("button");
+        btn.textContent = "YA";
+        document.body.appendChild(btn);
+      };
+      document.getElementById("demo").onclick = function () { add() };
+    </script>
+  </body>
+</html>
