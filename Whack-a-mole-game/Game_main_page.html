@@ -1,28 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <link rel="stylesheet" type="text/css" href="Style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="Style.css">
+  <title>Whack a Mole</title>
 </head>
-<div class="content">
-    <!-- (div.row>img:s*3)*3+div.control>(div.msg>span#time+btn+span#combo)+hr+b+p+hr -->
-    <div class="row">
-      <img src="yellow.png" class="cell" title="yellow"/>
-    </div>
-    <div class="row">
-      <img src="yellow.png" class="cell" title="yellow"/>
-    </div>
-    <div class="row">
-      <img src="yellow.png" class="cell" title="yellow"/>
+
+<body>
+  <div class="main">
+    <div class="content">
+      <img src="Image/state.png" class="cell" title="state" onclick="CountScore(0)">
+      <img src="Image/state.png" class="cell" title="state" onclick="CountScore(1)">
+      <img src="Image/state.png" class="cell" title="state" onclick="CountScore(2)">
+      <img src="Image/state.png" class="cell" title="state" onclick="CountScore(3)">
+      <img src="Image/state.png" class="cell" title="state" onclick="CountScore(4)">
+      <img src="Image/state.png" class="cell" title="state" onclick="CountScore(5)">
+      <img src="Image/state.png" class="cell" title="state" onclick="CountScore(6)">
+      <img src="Image/state.png" class="cell" title="state" onclick="CountScore(7)">
+      <img src="Image/state.png" class="cell" title="state" onclick="CountScore(8)">
     </div>
     <div class="control">
-      <div class="msg">
-        <span id="time">剩餘時間：0s</span>
+      <div class="nav-bar">
+        <span>剩餘時間:<span id="time">60</span>s</span>
         <button>遊戲開始</button>
-        <span id="combo">成績分數：0</span>
+        <span>成績分數:<span id="combo">100</span></span>
       </div>
-      <hr />
+      <hr>
       <b>遊戲說明</b>
-      <p>打地鼠遊戲，請點擊紅色圖片獲得分數（滿分 100)</p>
-      <hr />
+      <p>按下遊戲開始之後，請利用電腦鍵盤數字1~9作為打柴犬動作。或也能支援手機畫面點選。</p>
+      <hr>
     </div>
   </div>
+  <script src="App.js"></script>
+</body>
 
-  
+</html>

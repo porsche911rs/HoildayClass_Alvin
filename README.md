@@ -28,3 +28,7 @@
 ## Week5
  1. Introduce 'Event'. For example: Button onclick event.
  2. Introduce how to use 'EventLister'.
+## Week6
+ 1. Build Whack-a-mole-game & Booking_website base code(HTNL & CSS)
+ 2. Add App.js for Whack-a-mole-game.
+ 3. Introduce third-party time count tool kit: dayjs.
