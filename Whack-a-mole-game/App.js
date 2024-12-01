@@ -104,7 +104,7 @@ const CountScore = (space) =>
         CountScoreNode.textContent = ++Count;
 
         Animals[space].classList.remove('red');
-        Animals[space].classList.remove('green');
+        Animals[space].classList.remove('greenyellow');
         Animals[space].src='Image/off.png';
 
         //clearTimeout(RedToYellow[Animals[space].dataset.playerid]);
