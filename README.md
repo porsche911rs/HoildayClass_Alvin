@@ -32,3 +32,5 @@
  1. Build Whack-a-mole-game & Booking_website base code(HTNL & CSS)
  2. Add App.js for Whack-a-mole-game.
  3. Introduce third-party time count tool kit: dayjs.
+## Week7 
+ 1. Booking-website project.
