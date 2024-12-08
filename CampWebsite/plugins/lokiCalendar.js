@@ -10,14 +10,14 @@ let
   pallet = {},
   myCalendar = null,
   tableData = { // 表格資料，到時候提供 tableMaker 輸出畫面，若要更新value，就對這裏修改
-    totalPrice: 999, //總價格
-    normalCount: 1, //平日幾晚
-    holidayCount: 5, //價日幾晚
+    totalPrice: 0, //總價格
+    normalCount: 0, //平日幾晚
+    holidayCount: 0, //價日幾晚
     pallet: { //營位資料 => 標題名稱、可賣數量、預約日金、小計、訂購數
       aArea: { title: '河畔 × A 區', sellCount: 0, sellInfo: '<div></div>', sumPrice: 0, orderCount: 0 },
-      bArea: { title: '山間 × B 區', sellCount: 6, sellInfo: '<div></div>', sumPrice: 0, orderCount: 0 },
-      cArea: { title: '平原 × C 區', sellCount: 7, sellInfo: '<div></div>', sumPrice: 0, orderCount: 0 },
-      dArea: { title: '車屋 × D 區', sellCount: 8, sellInfo: '<div></div>', sumPrice: 0, orderCount: 0 }
+      bArea: { title: '山間 × B 區', sellCount: 0, sellInfo: '<div></div>', sumPrice: 0, orderCount: 0 },
+      cArea: { title: '平原 × C 區', sellCount: 0, sellInfo: '<div></div>', sumPrice: 0, orderCount: 0 },
+      dArea: { title: '車屋 × D 區', sellCount: 0, sellInfo: '<div></div>', sumPrice: 0, orderCount: 0 }
     }
   };
 
@@ -46,9 +46,46 @@ const init = () => {
         myCalendar.sub();
       });
 
+      const NodeSelects = document.querySelectorAll('select');
+      NodeSelects.forEach(nodeSelect => 
+      {
+         nodeSelect.onchange = (e) =>
+        {
+          tableData.totalPrice = 0;
+          nodeSelect.forEach(item => //總價 = 當下畫面4組下拉選項 x 小計(sumprice)
+          {
+            tableData.totalPrice += parseInt(item.value) * tableData.pallet[item.name].sumPrice;
+          })
+          //更新畫面上總價格，但不須整個tablePrint，只須更新html上小範圍就好
+          document.querySelector(`#selectPallet h3`).textContent = 
+          `$${tableData.totalPrice} / ${tableData.normalCount}，${tableData.hoildayCount}晚假日`;
+          document.querySelector('#selectPallet button').disabled = tableData.totalPrice === 0;  
+        }
+      });
+
+      document.querySelector('#selectPallet button').onclick = (e) =>
+      {
+          let LiStr = '';
+          const OrderOffCanvas = new bootstrap.Offcanvas('.offcanvas');
+          const NodeOffCanvas = document.querySelector('#orderForm');
+
+          //將tableData 4組跑出來
+          for(const key in tableData.pallet)
+          {
+            if(tableData.pallet[key].orderCount === 0) continue;
+          }
+          NodeOffCanvas.querySelector('ol').innerHTML = LiStr;
+          NodeOffCanvas.querySelector('.card-header.h5').textContent = document.querySelector('#selectPallet h3').textContent;
+          OrderOffCanvas.show();
+      }
       myCalendar.tableRefresh();
     });
 
+    document.querySelector('#orderForm').onsubmit = (e) =>
+    {
+        e.preventDefault();
+        console.log('訂單送出');
+    };
 }
 
 const runCalendarService = () => {
@@ -68,6 +105,8 @@ const runCalendarService = () => {
   const
     today = dayjs(),
     userChooseDays = [null, null],
+    DefaultTableData = JSON.stringify(tableData);
+    
     changeMonth = (num) => { // 先歸零，重新計算該有的 title 跟 listBox
       theDay = theDay.add(num, 'M'); // 今天的時間物件，透過第三方套件獲取
       calLeft = {
@@ -195,9 +234,48 @@ const runCalendarService = () => {
         item.onclick = () => myCalendar.choose(item);
       })
     },
+
     tableMaker = () => {
-      console.log('整理 tableData');
-      // tablePrint();
+      tableData = JSON.parse(tableData);
+
+      for (const key in tableData.pallet) {//想辦法獲得4組pallet名字，方便對tableData修訂內容
+        //1. 修正sellCount: 取得total總數再根據訂單減少
+        tableData.pallet[key].sellCount = pallet[key].total;
+        
+        //2. 得知user選啥AB日期
+        Document.querySelectorAll('li.selectHead, li.selectConnect').forEach(item=>
+        {
+          for(const key in tableData.pallet)
+          {
+              const HasOrder = booked.find(item => bookitem.date === item.dataset.date);
+              if(HasOrder)
+              {
+                  //tableData.pallet[key].sellCount -= HasOrder.sellout[key];  //(Error method)
+                  //有連續訂單時，可以賣給客人的防樹必淤是剩餘房況小值
+                  tableData.pallet[key].sellCount = Math.min(tableData.pallet[key].sellcount, pallet[key].total - HasOrder.sellout[key]);
+                  //console.log('找到的訂單', HasOrder); 
+              }
+              //假如房況有剩，提供該key資訊(日期 & 每帳價格)
+              if(tableData.pallet[key].sellcount)
+              {
+                  console.log(item.dataset.date); //日期
+
+                  const DayPrice = NodeList.classList.contains('holiday') ? pallet[key].hoildayPrice : pallet[key].normalPrice; //Method1
+                  tableData.pallet[key].sellInfo = `<div>${NodeList.dataset.date} (${DayPrice})</div>`;
+                  tableData.pallet[key].sumPrice += DayPrice;
+                  //const DayPrice = NodeList.classList.contains('holiday') ? 'hoildayPrice' : 'normalPrice'; //Method2
+                  //console.log(NodeList.dataset.date, DayPrice)
+                  tableData[NodeList.classList.contains('holiday') ? holidayCount: normalCount]++;
+              }
+              else
+              {
+                tableData.pallet[key].sellInfo = `<div>已售完</div>`;
+                tableData.pallet[key].sumPrice = 0;
+              }
+          }  
+        });
+      }
+      tablePrint();
     },
     tablePrint = () => {
       document.querySelectorAll('#selectPallet select').forEach(nodeSelect => {

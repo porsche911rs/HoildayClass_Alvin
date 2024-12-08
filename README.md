@@ -34,3 +34,10 @@
  3. Introduce third-party time count tool kit: dayjs.
 ## Week7 
  1. Booking-website project.
+## Week8
+ 1. Update object.
+ 2. Introduce Shallow copy & Deep copy.
+ 3. Introduce Bootstrap-Offcanvas.
+ 4. Introduce difference between Object & JSON.
+ 5. Bootstrap form validation.
+ 6. Introduce HTTP Cookie.
