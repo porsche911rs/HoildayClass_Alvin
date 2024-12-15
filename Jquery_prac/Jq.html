@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        *
+        {
+            border: 1px solid;
+        }
+      .hot {
+        color: red;
+      }
+      li:first-child
+      {
+        background: lightblue;
+      }
+
+      li:last-child
+      {
+        background:lightgreen;
+      }
+
+      #page:has(h1)
+      {
+        border-color: purple;
+        border-width: 5px;
+      }
+    </style>
+    <script src="./jquery-3.7.1.min.js">
+        $document.ready(function()
+        {
+            console.log('page end');
+            console.log($('#header'));
+            $('#header').addClass('hot');
+        })
+
+        const ShowConsole = () =>
+        {
+            console.log('Click');
+        };
+        
+        $('#Header').on('click',ShowConsole); 
+        $('#Header').click(()=> console.log('test')); 
+        $('#Header').hover(funtion() 
+        {
+            console.log($(this).text());
+        });
+        //$('#Header').off('click',ShowConsole); //remove
+
+
+        // $(window).load(function()
+        // {
+        // });
+    </script>
+</head>
+  <body>
+    <div id="page">
+      <h1 id="header">MyjQueryDemo List</h1>
+      <h2>我的代辦事項</h2>
+      <ul>
+        <li id="one" class="hot"><b>買</b> 晚餐</li>
+        <li id="two" class="hot">練程式</li>
+        <li id="three" class="hot">打電動</li>
+        <li id="four">記得去洗澡</li>
+        <input type="checkbox" id="scales" name="scales" checked />
+        <input type="checkbox" id="horns" name="horns" />
+      </ul>
+    </div>
+    <script>
+      //document.querySelector('header').classList('hot') //js ver
+      //$('#header').addClass('hot'); //jq ver
+      //jQuery('#header').addClass('hot'); //jq ver
+
+    //   document.querySelector('li').forEach(node => 
+    //     {
+    //         console.log(node.innerHTML);
+    //     }
+    //   });
+
+    $('li').each((_, Node) => /*通常senior engineer會把布用的參數用'_'代替*/
+    {
+        console.log($(node.html()));
+    });
+    </script>
+  </body>
+</html>

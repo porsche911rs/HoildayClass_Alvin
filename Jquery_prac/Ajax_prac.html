@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jqajax-animal</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js">
+
+    </script>
+  </head>
+  
+  <body>
+    <table width="100%">
+      <thead>
+        <tr>
+          <td>編號</td>
+          <td>動物名</td>
+          <td>重量</td>
+          <td>簡介</td>
+          <td>更新日期</td>
+          <td>操作</td>
+        </tr>
+        <tr><td colspan="6"><hr></td></tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr>
+            <td colspan="6" style="text-align: center;">
+                <hr>
+                <button>還要多更多</button>
+            </td>
+        </tr>
+      </tfoot>
+    </table>
+    <script>
+        // $(function()
+        // {
+        //     console.log($('table').html());
+        //     //Server Address: http://192.168.211.1/api.php?do=select
+        // });
+
+    //宣告區
+    let start=0;
+    const LoadBtn = $('tfoot button');
+    const ModifyBtn = $('tbody .mdy');
+    const SelectAnimal = () =>
+    {
+        // $.ajax(
+        // {
+        //     url: 'http://192.168.211.1/api.php?do=select',
+        //     type: 'GET',
+        //     dataType: 'html',
+        //     success: function(data)
+        //     {
+        //         console.log(data);
+        //         console.log(typeof data);
+        //         $('tbody').html(data);
+        //     }
+        // });
+
+        $.post('http://192.168.211.1/api.php?do=select', { start }, function(data)
+        {
+            if(data !== 'fail')
+            {
+                $('tbody').html(data);
+
+                //新html事件區
+                $('.mdy').click(ChangeInput);
+
+                start += 10;
+            }
+            else
+            {
+                //alert('沒有多更多...不要貪心了');
+                LoadBtn.attr('disabled','');
+                LoadBtn.text('沒有多更多...不要貪心了')
+            }
+        }, 'html');
+    }
+
+    const ChangeAnimal = (e) =>
+    {
+        const SaveBtn = $(e.target);
+        const Data = SaveBtn.parents('tr').find('input').serialize();
+
+        $.post
+        (
+            'http://192.168.211.1/api.php?do=update',
+            Data,
+            function(res)
+            {
+                console.log('Done');
+            }
+        )
+    }
+    const ChangeInput = (e) =>
+    {
+        const CurrModifyBtn = $(e.target);
+        const Uncles = CurrModifyBtn.parent.siblings();
+        
+        CurrModifyBtn.parents('tr').html
+        (
+
+        ).find('.save').click(ChangeAnimal);
+    }
+    //Event
+    LoadBtn.click(SelectAnimal);
+
+    //Init
+    SelectAnimal();
+    </script>
+  </body>
+</html>

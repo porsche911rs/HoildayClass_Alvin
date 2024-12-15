@@ -41,3 +41,7 @@
  4. Introduce difference between Object & JSON.
  5. Bootstrap form validation.
  6. Introduce HTTP Cookie.
+## Week9 
+ 1. Introduce how to use JQuery.
+ 2. JQuery version: 3.7.12.
+ 3. JQuery ajax call back-end API.
